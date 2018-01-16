@@ -445,7 +445,7 @@
                             }
                         },
                         {
-                            "data": "attendMoring",
+                            "data": "attendMorning",
                             render: function (data, type, full) {
                                 if(data!=null){
                                     return new Date(data).format("hh:mm:ss");
