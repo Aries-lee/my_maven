@@ -152,7 +152,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="attend_grid" class="table table-bordered table-striped">
+                    <table id="attend_grid" class="table table-bordered table striped">
                         <thead>
                         <tr>
                             <th>序号</th>
@@ -376,7 +376,7 @@
         //初始化表格
         table = $("#attend_grid")
                 .on('error.dt', function (e, settings, techNote, message) {
-                    console.warn(message)
+                    console.warn(message);
                 }).dataTable({
                     language: lang, //提示信息
                     autoWidth: false, //禁用自动调整列宽
@@ -390,7 +390,7 @@
                     pagingType: "simple_numbers", //分页样式：simple,simple_numbers,full,full_numbers
                     columnDefs: [{
                         "targets": 'nosort', //列的样式名
-                        "orderable": false //包含上样式名‘nosort'的禁止排序
+                        "orderable": false, //包含上样式名‘nosort'的禁止排序
                     }],
                     ajax: function (data, callback, settings) {
                         //封装请求参数
@@ -407,7 +407,6 @@
                             data: param, //传入组装的参数
                             dataType: "json",
                             success: function (result) {
-                                console.log(result);
                                 //console.log(result);
                                 //setTimeout仅为测试延迟效果
                                 setTimeout(function () {
@@ -426,12 +425,14 @@
                     },
                     //列表表头字段
                     columns: [
-                        {   "data": "seq",
+                        {   "data": "id",
                             render: function (data, type, full,row_col) {
                                 return row_col.row;
                             }
                         },
-                        {"data": "userId" , "visible" : false },
+                        {   "data": "userId" ,
+                            "visible" : false,
+                        },
                         {
                             "data": "attendDate",
                             render: function (data, type, full) {
