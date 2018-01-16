@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--需要调用quartz的bean-->
+    <bean class="com.lbb.common.task.AttendCheckTask" id="taskJob"/>
+
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="concurrent" value="false"/>
+        <!--指定作用域/类-->
+        <property name="targetObject" ref="taskJob"/>
+        <!--指定作用域里的方法-->
+        <property name="targetMethod" value="checkAttend"/>
+    </bean>
+
+    <!--trigger 配置 cronExpression设置运行时间-->
+    <bean id="attendCheck" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!--运行的任务-->
+        <property name="jobDetail" ref="jobDetail"/>
+        <!--设置启动时间形式，每5秒一次-->
+        <property name="cronExpression">
+            <value>0/30 * * * * ?</value>
+        </property>
+    </bean>
+
+    <!--调度工厂-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" id="scheduler">
+        <property name="triggers">
+            <list>
+                <ref bean="attendCheck"/>
+            </list>
+        </property>
+    </bean>
+</beans>

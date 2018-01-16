@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!--classPathEntry:数据库jdbc的驱动-->
+    <classPathEntry location="F:/Java/coder520jar/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar"/>
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <!--可选的注释生成器-->
+        <commentGenerator>
+            <!--是否去除自动生成的注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--必需有的数据库连接信息-->
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://localhost:3306/my_maven"
+                userId="root"
+                password="root">
+        </jdbcConnection>
+
+        <!--可选的类型转换器或类型解析器-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--必需的java模型生成器-->
+        <!--targetProject:自动生成代码位置-->
+        <javaModelGenerator targetPackage="com.lbb.attend.entity" targetProject="F:/Andriod workspace/my_maven/src/main/java">
+            <!--enableSubPackages:是否让schema作为包的后缀名-->
+            <property name="enableSubPackages" value="true"/>
+            <!--清理冲数据返回值前后的空格-->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--必需的map xml生成器-->
+        <sqlMapGenerator targetPackage="com.lbb.attend.dao" targetProject="F:/Andriod workspace/my_maven/src/main/java">
+            <!--enableSubPackages:是否让schema作为包的后缀名-->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--可选的mapp 或dao接口生成器-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lbb.attend.dao" targetProject="F:/Andriod workspace/my_maven/src/main/java">
+            <!--enableSubPackages:是否让schema作为包的后缀名-->
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--必需的pojo 实体生成器-->
+        <!--tableName:用语自动生成代码的数据库表;domainObjectName:对应数据库表的javaBean名称-->
+        <!--schema为数据库名，可以不写-->
+        <table tableName="attend" domainObjectName="Attend" enableInsert="true"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="fasle"
+               selectByExampleQueryId="false">
+        </table>
+    </context>
+</generatorConfiguration>

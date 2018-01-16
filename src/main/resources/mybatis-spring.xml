@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--自动代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--注解生成bean-->
+    <context:annotation-config/>
+    <!--包扫描-->
+    <context:component-scan base-package="com.lbb"/>
+    <!---->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com/lbb/**/**.xml"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lbb.**.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--事务管理 采用注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--数据库设置-->
+    <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource" init-method="init" destroy-method="close">
+        <!--数据库名称是driverClassName，不再是driver-->
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_username}"/>
+        <property name="password" value="${jdbc_password}"/>
+
+        <!--初始化连接大小-->
+        <property name="initialSize" value="5"/>
+        <!--连接池最大使用连接数量-->
+        <property name="maxActive" value="20"/>
+        <!--连接池最小空闲空间-->
+        <property name="minIdle" value="0"/>
+        <!--最大等待时间-->
+        <property name="maxWait" value="60000"/>
+
+        <!--验证查询，检查连接池是否可用-->
+        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <!--配置间隔多久检查一次-->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!--配置连接池中一个连接最小生存时间-->
+        <property name="minEvictableIdleTimeMillis" value="25200000"/>
+        <!--打开removeAbandoned-->
+        <property name="removeAbandoned" value="true"/>
+        <!--removeAbandoned连接超时设置-->
+        <property name="removeAbandonedTimeout" value="1800"/>
+        <!--关闭abandoned连接时输出日志-->
+        <property name="logAbandoned" value="true"/>
+        <!--过滤器-->
+        <property name="filters" value="mergeStat"/>
+
+    </bean>
+
+</beans>
