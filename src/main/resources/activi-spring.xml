@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Activity流程引擎配置项-->
+    <bean class="org.activiti.spring.SpringProcessEngineConfiguration" id="processEngineConfiguration">
+        <!--数据源和系统同一个-->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+        <!--更新数据库表 没有则创建-->
+        <property name="databaseSchemaUpdate" value="true"/>
+        <!--是否启动jobExecutor-->
+        <property name="jobExecutorActivate" value="false"/>
+        <property name="activityFontName" value="宋体"/>
+        <property name="labelFontName" value="宋体"/>
+        <!--自动部署流程-->
+        <!--<property name="deploymentResources">-->
+            <!--<list>-->
+                <!--<value>classpath*:workflow/*.bpmn</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    </bean>
+
+    <!--流程引擎 Bean生成-->
+    <bean class="org.activiti.spring.ProcessEngineFactoryBean" id="processEngine">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+
+    <!--工作流数据存储服务-->
+    <bean factory-bean="processEngine" factory-method="getRepositoryService" id="repositoryService"/>
+    <!--工作流运行时服务-->
+    <bean factory-bean="processEngine" factory-method="getRuntimeService" id="runtimeService"/>
+    <!--工作流任务服务-->
+    <bean factory-bean="processEngine" factory-method="getTaskService" id="taskService"/>
+    <!--工作流历史数据服务-->
+    <bean factory-bean="processEngine" factory-method="getHistoryService" id="historyService"/>
+    <!--工作流管理服务-->
+    <bean factory-bean="processEngine" factory-method="getManagementService" id="managementService"/>
+    <!--工作流身份识别服务-->
+    <bean factory-bean="processEngine" factory-method="getIdentityService" id="IdentityService"/>
+
+</beans>
