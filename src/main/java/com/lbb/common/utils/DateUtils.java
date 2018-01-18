@@ -44,4 +44,5 @@ public class DateUtils {
         calendar.set(Calendar.MINUTE,minute);
         return calendar.getTime();
     }
+
 }

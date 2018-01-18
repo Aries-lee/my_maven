@@ -132,6 +132,9 @@ public class AttendServiceImpl implements AttendService{
     @Override
     @Transactional
     public void checkAttend() {
+//        //测试quartz启动
+//        System.out.println("hi");
+        //判断有没有未出勤的
         List<Long> userIdList =attendMapper.selectTodayAbsence();
         if(CollectionUtils.isNotEmpty(userIdList)){
             List<Attend> attendList = new ArrayList<Attend>();
