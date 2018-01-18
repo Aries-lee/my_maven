@@ -10,6 +10,8 @@ public class ReAttend {
 
     private String reAttendStarter;
 
+    private Date reAttendDate;
+
     private Date reAttendEve;
 
     private Date reAttendMor;
@@ -42,6 +44,14 @@ public class ReAttend {
 
     public void setReAttendStarter(String reAttendStarter) {
         this.reAttendStarter = reAttendStarter == null ? null : reAttendStarter.trim();
+    }
+
+    public Date getReAttendDate() {
+        return reAttendDate;
+    }
+
+    public void setReAttendDate(Date reAttendDate) {
+        this.reAttendDate = reAttendDate;
     }
 
     public Date getReAttendEve() {

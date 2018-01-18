@@ -195,39 +195,67 @@
                             <div class="form-group">
                                 <label for="user_id" class="col-sm-3 control-label">用户ID</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="user_id" name="user_id" value="{user_id}"
+                                    <input type="text" class="form-control" id="attend_id" name="attend_id" value=""
                                            placeholder="请输入用户ID">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="lastname" class="col-sm-3 control-label">用户名</label>
+                                <label for="lastname" class="col-sm-3 control-label">发起人</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="user_name" value="" id="user_name"
-                                           placeholder="用户名">
+                                    <input type="text" class="form-control" name="re_attend_starter" value="" id="re_attend_starter"
+                                           placeholder="发起人">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastname" class="col-sm-3 control-label">地址</label>
+                                <label for="lastname" class="col-sm-3 control-label">补签日期</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="address" value="" id="address"
-                                           placeholder="地址">
+                                    <input type="text" class="form-control" name="re_attend_date" value="" id="re_attend_date"
+                                           placeholder="补签日期">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="remark" class="col-sm-3 control-label">备注</label>
+                                <label for="remark" class="col-sm-3 control-label">早打卡</label>
                                 <div class="col-sm-9">
-                                <textarea  class="form-control"  name="remark" value="{remark}" id="remark"
-                                           placeholder="备注">
+                                <textarea  class="form-control"  name="re_attend_mor" value="" id="re_attend_mor"
+                                           placeholder="早打卡">
+                                </textarea>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="remark" class="col-sm-3 control-label">晚打卡</label>
+                                <div class="col-sm-9">
+                                <textarea  class="form-control"  name="re_attend_eve" value="" id="re_attend_eve"
+                                           placeholder="晚打卡">
+                                </textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="remark" class="col-sm-3 control-label">当前处理人</label>
+                                <div class="col-sm-9">
+                                <textarea  class="form-control"  name="current_handler" value="" id="current_handler"
+                                           placeholder="当前处理人">
+                                </textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="remark" class="col-sm-3 control-label">状态</label>
+                                <div class="col-sm-9">
+                                <textarea  class="form-control"  name="status" value="" id="status"
+                                           placeholder="审核状态">
                                 </textarea>
                                 </div>
                             </div>
                         </form>
                     </div>
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
                         </button>
                         <button type="submit" class="btn btn-primary">
                             提交
@@ -483,7 +511,7 @@
                             "data": "操作列",
                             render: function (data, type, full) {
                                     if(full.attendStatus==2){
-                                        return  '<button type="button" class="btn btn-info"  onclick="return reAttend('+JSON.stringify(full).replace(/\"/g,"'")+')" >编辑</button>'
+                                        return  '<button type="button" class="btn btn-info"  onclick="return reAttend('+JSON.stringify(full).replace(/\"/g,"'")+')" >补签</button>'
                                     }else {
                                         return "";
                                     }

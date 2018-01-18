@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="attend_id" property="attendId" jdbcType="BIGINT" />
     <result column="re_attend_starter" property="reAttendStarter" jdbcType="VARCHAR" />
+    <result column="re_attend_date" property="reAttendDate" jdbcType="DATE" />
     <result column="re_attend_eve" property="reAttendEve" jdbcType="TIME" />
     <result column="re_attend_mor" property="reAttendMor" jdbcType="TIME" />
     <result column="current_handler" property="currentHandler" jdbcType="VARCHAR" />
@@ -12,7 +13,7 @@
     <result column="comments" property="comments" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, attend_id, re_attend_starter, re_attend_eve, re_attend_mor, current_handler, 
+    id, attend_id, re_attend_starter, re_attend_date, re_attend_eve, re_attend_mor, current_handler, 
     status, comments
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -27,11 +28,13 @@
   </delete>
   <insert id="insert" parameterType="com.lbb.reAttend.entity.ReAttend" >
     insert into re_attend (id, attend_id, re_attend_starter, 
-      re_attend_eve, re_attend_mor, current_handler, 
-      status, comments)
+      re_attend_date, re_attend_eve, re_attend_mor, 
+      current_handler, status, comments
+      )
     values (#{id,jdbcType=BIGINT}, #{attendId,jdbcType=BIGINT}, #{reAttendStarter,jdbcType=VARCHAR}, 
-      #{reAttendEve,jdbcType=TIME}, #{reAttendMor,jdbcType=TIME}, #{currentHandler,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{comments,jdbcType=VARCHAR})
+      #{reAttendDate,jdbcType=DATE}, #{reAttendEve,jdbcType=TIME}, #{reAttendMor,jdbcType=TIME}, 
+      #{currentHandler,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{comments,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lbb.reAttend.entity.ReAttend" >
     insert into re_attend
@@ -44,6 +47,9 @@
       </if>
       <if test="reAttendStarter != null" >
         re_attend_starter,
+      </if>
+      <if test="reAttendDate != null" >
+        re_attend_date,
       </if>
       <if test="reAttendEve != null" >
         re_attend_eve,
@@ -71,6 +77,9 @@
       <if test="reAttendStarter != null" >
         #{reAttendStarter,jdbcType=VARCHAR},
       </if>
+      <if test="reAttendDate != null" >
+        #{reAttendDate,jdbcType=DATE},
+      </if>
       <if test="reAttendEve != null" >
         #{reAttendEve,jdbcType=TIME},
       </if>
@@ -97,6 +106,9 @@
       <if test="reAttendStarter != null" >
         re_attend_starter = #{reAttendStarter,jdbcType=VARCHAR},
       </if>
+      <if test="reAttendDate != null" >
+        re_attend_date = #{reAttendDate,jdbcType=DATE},
+      </if>
       <if test="reAttendEve != null" >
         re_attend_eve = #{reAttendEve,jdbcType=TIME},
       </if>
@@ -119,6 +131,7 @@
     update re_attend
     set attend_id = #{attendId,jdbcType=BIGINT},
       re_attend_starter = #{reAttendStarter,jdbcType=VARCHAR},
+      re_attend_date = #{reAttendDate,jdbcType=DATE},
       re_attend_eve = #{reAttendEve,jdbcType=TIME},
       re_attend_mor = #{reAttendMor,jdbcType=TIME},
       current_handler = #{currentHandler,jdbcType=VARCHAR},
