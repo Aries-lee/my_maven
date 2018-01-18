@@ -20,7 +20,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUserByUserName(String username) {
-        User user = userMapper.selectByUserName(username);
+        User user = null;
+        try {
+            user = userMapper.selectByUserName(username);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return user;
     }
 

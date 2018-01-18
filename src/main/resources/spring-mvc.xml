@@ -56,4 +56,5 @@
         <!--日期处理-->
         <property name="dateToolAttribute" value="date"/>
     </bean>
+
 </beans>
