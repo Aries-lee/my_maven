@@ -18,9 +18,10 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
 
+    public User user;
+
     @Override
     public User findUserByUserName(String username) {
-        User user = null;
         try {
             user = userMapper.selectByUserName(username);
         } catch (Exception e) {
@@ -39,4 +40,5 @@ public class UserServiceImpl implements UserService{
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         userMapper.insertSelective(user);
     }
+
 }
