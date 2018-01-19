@@ -16,13 +16,12 @@ public class CustomCredentialsMatcher extends SimpleCredentialsMatcher {
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-        Object tokenCredentials = null;
-        Object accountCredentials = null;
         try {
             UsernamePasswordToken userToken = (UsernamePasswordToken) token;
             String password = String.valueOf(userToken.getPassword());
-            tokenCredentials = SecurityUtils.encryptPassword(password);
-            accountCredentials = this.getCredentials(info);
+            Object tokenCredentials = SecurityUtils.encryptPassword(password);
+            Object accountCredentials = this.getCredentials(info);
+            return this.equals(tokenCredentials,accountCredentials);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

@@ -8,21 +8,50 @@
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="head_image" property="headImage" jdbcType="VARCHAR" />
+    <collection property="roleList" resultMap="RoleResultMap"/>
   </resultMap>
+  <resultMap id="RoleResultMap" type="com.lbb.user.entity.Role" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="roleid" property="roleid" jdbcType="BIGINT" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <collection property="permissionList" resultMap="PermissionResultMap"/>
+  </resultMap>
+  <resultMap id="PermissionResultMap" type="com.lbb.user.entity.Permission" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="permissionid" property="permissionid" jdbcType="BIGINT" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Permission_Column_List" >
+    id, permissionid, permission, p.description pd
+  </sql>
+  <sql id="Role_Column_List" >
+    id, roleid, role, r.description rd
+  </sql>
   <sql id="Base_Column_List" >
     id, username, password, mobile, real_name, head_image
   </sql>
+  <select id="selectByUserName" resultMap="BaseResultMap" >
+    select
+    <!--include 引用sql标签时，要注意sql标签内容的comma,有可能发生异常：org.apahce.ibatis.builder.IncompleteElementException:could not find Sql statement to include with refid-->
+    <include refid="Base_Column_List"/>,
+    <include refid="Permission_Column_List"/>,
+    <include refid="Role_Column_List"/>,
+--     p.id, permissionid, permission, p.description pd,
+--     r.id, roleid, role, r.description rd,
+    FROM user u
+    LEFT JOIN user_role ur ON ur.user_id = u.id
+    LEFT JOIN role r ON ur.role_id = r.roleid
+    LEFT JOIN role_permission rp ON rp.role_id = r.roleid
+    LEFT JOIN permission p ON p.permissionid = rp.permission_id
+    WHERE username = #{username}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectByUserName" resultMap="BaseResultMap" >
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where username = #{username}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from user
