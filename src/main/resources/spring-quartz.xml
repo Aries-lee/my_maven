@@ -20,7 +20,7 @@
         <property name="jobDetail" ref="jobDetail"/>
         <!--设置启动时间形式，每5秒一次-->
         <property name="cronExpression">
-            <value>0/30 * * * * ?</value>
+            <value>0 0 0/24 * * ? *</value>
         </property>
     </bean>
 

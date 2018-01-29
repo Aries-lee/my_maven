@@ -15,11 +15,11 @@
         <property name="activityFontName" value="宋体"/>
         <property name="labelFontName" value="宋体"/>
         <!--自动部署流程-->
-        <!--<property name="deploymentResources">-->
-            <!--<list>-->
-                <!--<value>classpath*:workflow/*.bpmn</value>-->
-            <!--</list>-->
-        <!--</property>-->
+        <property name="deploymentResources">
+            <list>
+                <value>classpath*:workflow/*.bpmn</value>
+            </list>
+        </property>
     </bean>
 
     <!--流程引擎 Bean生成-->

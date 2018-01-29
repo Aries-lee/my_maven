@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by Administrator on 2018/1/11.
  */
-public class SecurityUtils {
+public class MySecurityUtils {
     /**
      *@Author AriesLi [www.coder520.com]
      *@Date 2018/1/11 9:34

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lbb.reAttend.dao.ReAttendMapper" >
-  <resultMap id="BaseResultMap" type="com.lbb.reAttend.entity.ReAttend" >
+<mapper namespace="com.lbb.workflow.dao.ReAttendMapper" >
+  <resultMap id="BaseResultMap" type="com.lbb.workflow.entity.ReAttend" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="attend_id" property="attendId" jdbcType="BIGINT" />
     <result column="re_attend_starter" property="reAttendStarter" jdbcType="VARCHAR" />
@@ -22,11 +22,17 @@
     from re_attend
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectReAttendRecord" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from re_attend
+    where re_attend_starter = #{username}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from re_attend
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.lbb.reAttend.entity.ReAttend" >
+  <insert id="insert" parameterType="com.lbb.workflow.entity.ReAttend" useGeneratedKeys="true" keyProperty="id">
     insert into re_attend (id, attend_id, re_attend_starter, 
       re_attend_date, re_attend_eve, re_attend_mor, 
       current_handler, status, comments
@@ -36,7 +42,7 @@
       #{currentHandler,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{comments,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lbb.reAttend.entity.ReAttend" >
+  <insert id="insertSelective" parameterType="com.lbb.workflow.entity.ReAttend" useGeneratedKeys="true" keyProperty="id">
     insert into re_attend
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -97,7 +103,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lbb.reAttend.entity.ReAttend" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.lbb.workflow.entity.ReAttend" >
     update re_attend
     <set >
       <if test="attendId != null" >
@@ -127,7 +133,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lbb.reAttend.entity.ReAttend" >
+  <update id="updateByPrimaryKey" parameterType="com.lbb.workflow.entity.ReAttend" >
     update re_attend
     set attend_id = #{attendId,jdbcType=BIGINT},
       re_attend_starter = #{reAttendStarter,jdbcType=VARCHAR},

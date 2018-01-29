@@ -37,10 +37,10 @@
     select
     <!--include 引用sql标签时，要注意sql标签内容的comma,有可能发生异常：org.apahce.ibatis.builder.IncompleteElementException:could not find Sql statement to include with refid-->
     <include refid="Base_Column_List"/>,
-    <!--<include refid="Permission_Column_List"/>,-->
-    <!--<include refid="Role_Column_List"/>-->
-    p.id, permissionid, permission, p.description pd,
-    r.id, roleid, role, r.description rd
+    <include refid="Permission_Column_List"/>,
+    <include refid="Role_Column_List"/>
+--     p.id, permissionid, permission, p.description pd,
+--     r.id, roleid, role, r.description rd
     FROM user u
     LEFT JOIN user_role ur ON ur.user_id = u.id
     LEFT JOIN role r ON ur.role_id = r.roleid

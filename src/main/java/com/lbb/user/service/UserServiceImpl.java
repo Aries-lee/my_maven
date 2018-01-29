@@ -1,10 +1,11 @@
 package com.lbb.user.service;
 
-import com.lbb.common.utils.SecurityUtils;
+import com.lbb.common.utils.MySecurityUtils;
 import com.lbb.user.dao.UserMapper;
 import com.lbb.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService{
     public User user;
 
     @Override
+    @ResponseBody
     public User findUserByUserName(String username) {
         try {
             user = userMapper.selectByUserName(username);
@@ -37,7 +39,7 @@ public class UserServiceImpl implements UserService{
     */
     @Override
     public void createUser(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        user.setPassword(MySecurityUtils.encryptPassword(user.getPassword()));
         userMapper.insertSelective(user);
     }
 

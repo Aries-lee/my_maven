@@ -1,7 +1,9 @@
-package com.lbb.reAttend.dao;
+package com.lbb.workflow.dao;
 
-import com.lbb.reAttend.entity.ReAttend;
+import com.lbb.workflow.entity.ReAttend;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ReAttendMapper {
@@ -17,4 +19,6 @@ public interface ReAttendMapper {
     int updateByPrimaryKeySelective(ReAttend record);
 
     int updateByPrimaryKey(ReAttend record);
+
+    List<ReAttend> selectReAttendRecord(String username);
 }

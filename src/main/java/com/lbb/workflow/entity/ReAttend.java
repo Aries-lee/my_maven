@@ -1,9 +1,9 @@
-package com.lbb.reAttend.entity;
+package com.lbb.workflow.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ReAttend {
-
+public class ReAttend implements Serializable {
     private Long id;
 
     private Long attendId;
@@ -21,6 +21,10 @@ public class ReAttend {
     private Byte status;
 
     private String comments;
+
+    private String taskId;
+
+    private String approveFlag;
 
     public Long getId() {
         return id;
@@ -92,5 +96,21 @@ public class ReAttend {
 
     public void setComments(String comments) {
         this.comments = comments == null ? null : comments.trim();
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getApproveFlag() {
+        return approveFlag;
+    }
+
+    public void setApproveFlag(String approveFlag) {
+        this.approveFlag = approveFlag;
     }
 }

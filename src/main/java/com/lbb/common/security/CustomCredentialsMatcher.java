@@ -1,6 +1,6 @@
 package com.lbb.common.security;
 
-import com.lbb.common.utils.SecurityUtils;
+import com.lbb.common.utils.MySecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -19,7 +19,7 @@ public class CustomCredentialsMatcher extends SimpleCredentialsMatcher {
         try {
             UsernamePasswordToken userToken = (UsernamePasswordToken) token;
             String password = String.valueOf(userToken.getPassword());
-            Object tokenCredentials = SecurityUtils.encryptPassword(password);
+            Object tokenCredentials = MySecurityUtils.encryptPassword(password);
             Object accountCredentials = this.getCredentials(info);
             return this.equals(tokenCredentials,accountCredentials);
         } catch (NoSuchAlgorithmException e) {

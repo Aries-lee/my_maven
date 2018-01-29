@@ -1,6 +1,6 @@
 package com.lbb.login.controller;
 
-//import com.lbb.common.utils.SecurityUtils;
+//import com.lbb.common.utils.MyMySecurityUtils;
 import org.apache.shiro.*;
 import com.lbb.user.entity.User;
 import com.lbb.user.service.UserService;
@@ -52,7 +52,7 @@ public class LoginController {
         String username = request.getParameter("username");
         String pwd = request.getParameter("password");
         UsernamePasswordToken token = new UsernamePasswordToken(username,pwd);
-        //token.setRememberMe(true);
+//        token.setRememberMe(true);
         Subject subject = SecurityUtils.getSubject();
         try{
             subject.login(token);
@@ -72,7 +72,7 @@ public class LoginController {
 ////      查数据库 调用MD5 对比密码
 //        User user = userService.findUserByUserName(username);
 //        if(user !=null) {
-//            if(SecurityUtils.checkPassword(pwd,user.getPassword())) {
+//            if(MyMySecurityUtils.checkPassword(pwd,user.getPassword())) {
 ////              校验成功 设置session 返回成功signal
 //                request.getSession().setAttribute("userinfo",user);
 //                return "login_success";

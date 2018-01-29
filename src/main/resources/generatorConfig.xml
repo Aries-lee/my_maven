@@ -26,7 +26,7 @@
 
         <!--必需的java模型生成器-->
         <!--targetProject:自动生成代码位置-->
-        <javaModelGenerator targetPackage="com.lbb.reAttend.entity" targetProject="F:/Andriod workspace/my_maven/src/main/java">
+        <javaModelGenerator targetPackage="com.lbb.workflow.entity" targetProject="F:/Andriod workspace/my_maven/src/main/java">
             <!--enableSubPackages:是否让schema作为包的后缀名-->
             <property name="enableSubPackages" value="true"/>
             <!--清理冲数据返回值前后的空格-->
@@ -34,13 +34,13 @@
         </javaModelGenerator>
 
         <!--必需的map xml生成器-->
-        <sqlMapGenerator targetPackage="com.lbb.reAttend.dao" targetProject="F:/Andriod workspace/my_maven/src/main/java">
+        <sqlMapGenerator targetPackage="com.lbb.workflow.dao" targetProject="F:/Andriod workspace/my_maven/src/main/java">
             <!--enableSubPackages:是否让schema作为包的后缀名-->
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!--可选的mapp 或dao接口生成器-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lbb.reAttend.dao" targetProject="F:/Andriod workspace/my_maven/src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lbb.workflow.dao" targetProject="F:/Andriod workspace/my_maven/src/main/java">
             <!--enableSubPackages:是否让schema作为包的后缀名-->
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
